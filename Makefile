@@ -5,6 +5,7 @@ all: build
 IMAGE=$(shell basename $(CURDIR))
 CONTAINER=${IMAGE}-tmp
 APP=gnome-terminal-3.28.2
+PATCHFILE=search_on_google.patch
 
 clean:
 	docker rm -f ${CONTAINER}
@@ -12,7 +13,7 @@ clean:
 	rm -Rf src
 
 build:
-	docker build -t ${IMAGE} .
+	docker build -t ${IMAGE} --build-arg PATCHFILE .
 	docker create --name ${CONTAINER} ${IMAGE}
 	mkdir -p binary
 	docker cp ${CONTAINER}:/buildroot/${APP}/src/gnome-terminal binary/
@@ -36,7 +37,7 @@ local:
 	mkdir -p src
 	cd src && apt-get -y source gnome-terminal
 	cd src && cp -R ${APP} ${APP}-orig
-	cd src/${APP} && patch -p1 <../../search_on_google.patch
+	cd src/${APP} && patch -p1 <../../${PATCHFILE}
 
 patch:
 	cd src && diff -rwu ${APP}-orig ${APP}; [ $$? -eq 1 ]

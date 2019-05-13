@@ -29,7 +29,7 @@ diff -rwu gnome-terminal-3.28.2-orig/src/terminal-util.h gnome-terminal-3.28.2/s
  #endif /* TERMINAL_UTIL_H */
 diff -rwu gnome-terminal-3.28.2-orig/src/terminal-window.c gnome-terminal-3.28.2/src/terminal-window.c
 --- gnome-terminal-3.28.2-orig/src/terminal-window.c	2019-05-13 19:04:21.562955256 +0300
-+++ gnome-terminal-3.28.2/src/terminal-window.c	2019-05-13 19:21:49.064220091 +0300
++++ gnome-terminal-3.28.2/src/terminal-window.c	2019-05-13 19:24:11.553855074 +0300
 @@ -654,6 +654,29 @@
    vte_terminal_copy_clipboard_format (VTE_TERMINAL (priv->active_screen), format);
  }
@@ -52,7 +52,7 @@ diff -rwu gnome-terminal-3.28.2-orig/src/terminal-window.c gnome-terminal-3.28.2
 +  g_assert_nonnull (parameter);
 +  g_variant_get (parameter, "&s", &format_str);
 +  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window), GDK_SELECTION_PRIMARY);
-+  url = g_strdup_printf ("https://www.google.com/search?ie=UTF-8&q=%s", gtk_clipboard_wait_for_text(clipboard));
++  url = g_strdup_printf ("https://duckduckgo.com/?q=%s", gtk_clipboard_wait_for_text(clipboard));
 +  open_url (GTK_WINDOW (window), url, gtk_get_current_event_time (), NULL);
 +  g_free(url);
 +}
@@ -64,7 +64,7 @@ diff -rwu gnome-terminal-3.28.2-orig/src/terminal-window.c gnome-terminal-3.28.2
    g_menu_append (section4, _("_Copy"), "win.copy::text");
    g_menu_append (section4, _("Copy as _HTML"), "win.copy::html");
    g_menu_append (section4, _("_Paste"), "win.paste-text");
-+  g_menu_append (section4, _("Search on Google"), "win.search-internet::text");
++  g_menu_append (section4, _("Search on DuckDuckGo"), "win.search-internet::text");
    if (g_action_get_enabled (G_ACTION (lookup_action (window, "paste-uris"))))
      g_menu_append (section4, _("Paste as _Filenames"), "win.paste-uris");
  

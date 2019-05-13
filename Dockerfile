@@ -31,8 +31,10 @@ WORKDIR $HOMEDIR
 # Download sources into local dir
 RUN apt-get -y source gnome-terminal
 
-ADD search_on_google.patch ./
+ARG PATCHFILE=search_on_google.patch
+ADD ${PATCHFILE} ./
 RUN cd gnome-terminal-3.28.2 && \
 	./configure --disable-search-provider && \
-	patch -p1 < ../search_on_google.patch && \
+	patch -p1 < ../${PATCHFILE} && \
 	make
+
