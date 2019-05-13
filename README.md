@@ -3,6 +3,12 @@
 Builds in docker new gnome-terminal binary
 which adds "Search on google" to the right click menu.
 
+## Requirements
+
+- Ubuntu 18.04
+- Docker 18.09+
+- `make` (sudo apt install make)
+
 ## Usage
 
 - make build
