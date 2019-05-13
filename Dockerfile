@@ -32,8 +32,9 @@ WORKDIR $HOMEDIR
 RUN apt-get -y source gnome-terminal
 
 ARG PATCHFILE=search_on_google.patch
+ARG APPVER=gnome-terminal-3.28.2
 ADD ${PATCHFILE} ./
-RUN cd gnome-terminal-3.28.2 && \
+RUN cd ${APPVER} && \
 	./configure --disable-search-provider && \
 	patch -p1 < ../${PATCHFILE} && \
 	make
